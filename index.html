@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>框架</title>
+    <script type="text/javascript" src="http://192.168.100.196:9000/Scripts/lib/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/lib/vue-2.2.0.min.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/tool/pconst.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/extend/Date.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/extend/jQueryDom.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/extend/String.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/extend/Math.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/scripts/tool/ptool.js"></script>
+    <script type="text/javascript" src="http://192.168.100.196:9000/pcontrol/flatBlueSeries_src_2.0.js"></script>
+    <link rel="stylesheet" href="http://192.168.100.196:9000/pcontrol/css/flatBlueSeries_min_2.0.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        var CreatVue = {
+            newVUE: function () {
+                return new Vue({
+                    el: '#app',
+                    data: datamodal,
+                    methods:{
+                    }   
+                })
+            }
+        }
+        var itemData = [
+                
+        ]
+        // function itemclick() {
+            // console.log(arguments)
+        // }
+        // function comboboxsel(data){
+        //     var a = data.id - 1;
+        //     var mn = app.menuItems.length;
+        //     app.menuItems.splice(0,mn,itemData[a]);
+        // }
+        var datamodal = {
+            userName: 'test',
+            userMenu: ['1号', '2号', '3号'],
+            ticon: './150.jpg',
+            menuItems:[
+                {   name:"简单",id:0,kings:[
+                        {name:"按钮",id:0,url:'/no/button?number=2'},
+                        {name:"开关",id:1,url:'/no/switch?number=21'},
+                        {name:"文本框",id:2,url:"/no/text"},
+                        {name:"下拉框",id:3,url:"/no/combobox"},
+                        {name:"table",id:4,url:"/no/table"},
+                        {name:"window",id:5,url:"/no/window"},
+                        {name:"page",id:6,url:"/no/page"},
+                        {name:"search",id:7,url:"/no/search"},
+                        {name:"scroll",id:8,url:"/no/scroll"},
+                        {name:"tree",id:10,url:"/no/a"},
+                        {name:"time",id:11,url:"/no/time"}
+                        // {name:"a",id:2,url:"/no/tree"}
+                    ]
+                },{
+                    name:"绑定",id:1,kings:[
+                        {name:"下拉框",id:2,url:"/no/prc"},
+                        {name:"gird",id:9,url:"/no/pgird"},
+                        {name:"动画",id:2,url:"/no/add"}
+                    ]
+                }
+            ]
+        }
+        function _console(a){
+            app.userName=a;
+            // console.log(app.userName)
+            $("#userchange").pshow({text:"用户切换成功", state: "success"})
+        }
+        $(function () {
+            var app = CreatVue.newVUE();
+            window.app = app;
+            // console.log(app)
+        })
+        $(function(){
+            $("#div2").psel({url:"/no/button"});
+        })
+    </script>
+    <pnotice-message id="userchange"></pnotice-message>
+    <div style="height: 100%; width: 100%" id="app">
+        <pframe-normal id="'div2'" title="'SASS'"> 
+            <user head="" name="userName"> 
+                <item datasource="userMenu" click="_console"></item> 
+            </user>
+            <item  datasource="menuItems" text="name" icon="icon" url="url" child="kings" click="itemclick"> 
+                <manage text="'系统管理'" icon="'t'" url="http://www.baidu.com"></manage> 
+                <combobox> 
+                    <pcombobox-normal id="'combobox1'" isborder="false" orientation="down" bind="true" sel="comboboxsel"> 
+                        <header placeholder="请开始表演" prefix="进行："></header> 
+                        <item datasource="menuItems" text="name" pronametoissel="issel"></item> 
+                    </pcombobox-normal> 
+                </combobox> 
+            </item> 
+        </pframe-normal>
+        <pbutton-blue name="点击"></pbutton-blue>
+    </div>
+</body>
+</html>
